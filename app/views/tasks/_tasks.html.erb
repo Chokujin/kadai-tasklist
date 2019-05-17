@@ -1,0 +1,27 @@
+<ul class="list-unstyled">
+  <div>User: <%= current_user.name %></div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Content</th>
+        <th>Created_at</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <% tasks.each do |task| %>
+    <tbody>
+      <tr>
+        <td><%= link_to task.status %></td>
+        <td><%= link_to task.content %></td>
+        <td><%= link_to task.created_at %></td>
+        <td>
+          <% if current_user == task.user %>
+            <%= link_to "Delete", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
+        </td>
+      </tr>
+
+    <% end %>
+  <%= paginate tasks %>
+</ul>
