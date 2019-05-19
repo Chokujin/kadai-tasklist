@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   resources :users, only: [:new, :create]
-
   resources :tasks, only: [:create, :show, :edit, :update, :destroy]
   
   #resources :messagesは下記の意

@@ -1,29 +1,19 @@
-<% if logged_in? %>
-  <div class="row">
-    <aside class="col-sm-4">
-      <%= form_with(model: @task, local: true) do |f| %>
-        <div class="form-group">
-          <%= f.label :status, 'Status：' %>
-          <%= f.select :status, [["Working", "Working"], ["Done", "Done"], ["Pending", "Pending"]],{} , {class: 'form-control'} %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :content, 'Content：' %>
-          <%= f.text_area :content, class: 'form-control', rows: 1 %>
-        </div>
-
-        <%= f.submit '登録', class: 'btn btn-primary btn-block' %>
-      <% end %>
-    </aside>
-    <div class="col-sm-8">
-      <%= render 'tasks/tasks', tasks: @tasks %>
-    </div>
+<div class="row">
+  <aside class="col-sm-4">
+    <%= form_with(model: @task, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      <div class="form-group">
+        <%= f.label :status, 'Status：' %>
+        <%= f.select :status, [["Working", "Working"], ["Done", "Done"], ["Pending", "Pending"]],{} , {class: 'form-control'} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content, 'Content：' %>
+        <%= f.text_area :content, class: 'form-control', rows: 1 %>
+      </div>
+      <%= f.submit '登録', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </aside>
+  <div class="col-sm-8">
+    <%= render 'tasks/tasks', tasks: @tasks %>
   </div>
-<% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to the Tasklists</h1>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
-    </div>
-  </div>
-<% end %>
+</div>
